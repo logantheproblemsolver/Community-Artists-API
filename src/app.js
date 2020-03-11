@@ -4,6 +4,9 @@ const morgan = require ('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const {NODE_ENV, CLIENT_ORIGIN} = require('./config')
+const logger = require('./logger')
+const showArtworkRouter = require('./ShowArtwork/showArtworkEndpoint')
+const uploadArtworkRouter = require('./UploadArtwork/uploadArtworkRouter')
 
 const app = express()
 
@@ -21,7 +24,7 @@ const morganOption = (NODE_ENV === 'production')
 
 
 
-    app.get('/api/*', (req, res) => {
+    app.get('/api', (req, res) => {
         res.json({ok: true})
     })
 
@@ -31,11 +34,14 @@ const morganOption = (NODE_ENV === 'production')
             response = {error: {message: 'server error'}}
         } else {
             console.error(error)
+            logger.error(error.message)
             response = {message: error.message, error}
         }
         res.status(500).json(response)
     })
 
+    app.use(showArtworkRouter)
+    app.use(uploadArtworkRouter)
 
 
     module.exports = app
