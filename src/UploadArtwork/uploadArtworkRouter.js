@@ -1,8 +1,20 @@
 const express = require('express')
+const uuid = require('uuid/v4')
+const artworkData = require('../artworkData')
+
 
 
 const uploadArtworkRouter = express.Router()
 const bodyParser = express.json()
+
+const serializeartwork = artwork => ({
+    id: artwork.id,
+    image: xss(artwork.image),
+    title: xss(artwork.title),
+    artist_name: artwork.artist_name,
+    price: artwork.price,
+    description: xss(artwork.description),
+})
 
 
 uploadArtworkRouter
@@ -19,10 +31,15 @@ uploadArtworkRouter
 
         const {image, title, description} = req.body
 
+        const artwork = {id: uuid(), image, title, artist_name, price, description}
+
+        artworkData.artwork.push(artwork)
+
+        logger.info(`Artwork with id ${artwork.id} is uploaded!`)
         res
             .status(201)
             .location(`http://localhost:8000/${artwork.id}`)
-            .json('artwork is uploaded!')
+            .json(serializeartwork(artwork))
 
     })
 
