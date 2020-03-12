@@ -11,7 +11,6 @@ showArtworkRouter
     })
 
 
-
 showArtworkRouter
     .route('/api/showartowk/:showartwork_Id')
     .get((req, res) => {
@@ -28,16 +27,6 @@ showArtworkRouter
             .status(200)
             .json("you've gotten the specific artwork!")
     })
-
-
-
-
-
-
-
-
-
-
 
 
 

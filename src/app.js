@@ -5,7 +5,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const {NODE_ENV, CLIENT_ORIGIN} = require('./config')
 const logger = require('./logger')
-const showArtworkRouter = require('./ShowArtwork/showArtworkEndpoint')
+const showArtworkRouter = require('./ShowArtwork/showArtworkRouter')
 const uploadArtworkRouter = require('./UploadArtwork/uploadArtworkRouter')
 
 const app = express()
