@@ -1018,6 +1018,8 @@ Kj+Hzk+JAMswyoacheJgxcycZFIAQiSBRjG2Atlr94jcORRSaOsEiuikfvP/2Q==')`,
     title: 'Absract Art', 
     artist_name: 'Unknown',
     price: '$0',
-    description: 'Just a random I got off of Googlge'
+    description: 'Just a random I got off of Google'
     },
 ]
+
+module.exports = {artwork}

@@ -9,3 +9,5 @@ const UploadArtwork = {
             })
     }
 }
+
+module.exports = UploadArtwork

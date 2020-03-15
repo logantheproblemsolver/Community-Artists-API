@@ -1,13 +1,16 @@
 const express = require('express')
 const uuid = require('uuid/v4')
+const logger = require('../logger')
 const artworkData = require('../artworkData')
+const xss = require('xss')
+const UploadArtwork = require('./uploadArtworkService')
 
 
 
 const uploadArtworkRouter = express.Router()
 const bodyParser = express.json()
 
-const serializeartwork = artwork => ({
+const serializeArtwork = artwork => ({
     id: artwork.id,
     image: xss(artwork.image),
     title: xss(artwork.title),
@@ -18,7 +21,7 @@ const serializeartwork = artwork => ({
 
 
 uploadArtworkRouter
-    .route('/uploadArtwork')
+    .route('/api/uploadArtwork')
     .post(bodyParser, (req, res) => {
         for (const field of ['image', 'title', 'description']) {
             if (!req.body[field]) {
@@ -29,17 +32,23 @@ uploadArtworkRouter
             }
         }
 
-        const {image, title, description} = req.body
+        const {image, title, artist_name, price, description} = req.body
 
         const artwork = {id: uuid(), image, title, artist_name, price, description}
+        const uploadedArtwork = {image, title, artist_name, price, description}
+
+        UploadArtwork.insertArtwork(
+            req.app.get('db'),
+            uploadedArtwork
+        )
 
         artworkData.artwork.push(artwork)
 
         logger.info(`Artwork with id ${artwork.id} is uploaded!`)
         res
             .status(201)
-            .location(`http://localhost:8000/${artwork.id}`)
-            .json(serializeartwork(artwork))
+            .location(`http://localhost:8000/api/uploadArtwork${artwork.id}`)
+            .json(serializeArtwork(artwork))
 
     })
 

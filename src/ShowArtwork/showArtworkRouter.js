@@ -1,6 +1,7 @@
 const express = require('express')
 const ShowArtwork = require('./showArtworkService')
 const xss = require('xss')
+const logger = require('../logger')
 
 const showArtworkRouter = express.Router()
 
@@ -29,21 +30,25 @@ showArtworkRouter
 
 
 showArtworkRouter
-    .route('/api/showartwork/:showartwork_Id')
-    .get((req, res, next) => {
+    .route('/api/showartwork/:showartwork_id')
+    .all((req, res, next) => {
         const {showartwork_id} = req.params
         ShowArtwork.getById(req.app.get('db'), showartwork_id)
             .then(artwork => {
                 if(!artwork) {
-                    logger.error(`Artwork with id {artwork_id} not found`)
+                    logger.error(`Artwork with id {showartwork_id} not found`)
                     return res
                         .status(400)
                         .json({
                             error: {message: `Artwork not found`}
                         })
                 }
+                res.artwork = artwork
+                next()
             })
             .catch(next)
+    })
+    .get((req, res, next) => {
         res
             .status(200)
             .json(serializeartwork(res.artwork))
