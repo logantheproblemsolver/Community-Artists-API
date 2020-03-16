@@ -46,36 +46,65 @@ const serializeArtwork = artwork => ({
 
 uploadArtworkRouter
     .route('/api/uploadArtwork')
+    uploadArtworkRouter
+    .route('/api/uploadArtwork')
     .post(bodyParser, (req, res) => {
 
         const {title, artist_name, price, description} = req.body
-
         
-        const values = Object.values(req.files)
-        const image = values.map(image => cloudinary.uploader.upload(image.path))
-        const uploadedArtwork = {image, title, artist_name, price, description}
+        let uploadedArtwork = {title, artist_name, price, description}
 
-            UploadArtwork.insertArtwork(
-                req.app.get('db'),
-                uploadedArtwork
-            )
+        const values = Object.values(req.files);
 
-            if(!err)
-                return res
-                    .status(201)
-                    .location(`http://localhost:8000/api/uploadArtwork${artwork.id}`)
-                    .json(serializeArtwork(artwork))
-
-        
-
-        const artwork = {id: uuid(), image, title, artist_name, price, description}
-
-
-        artworkData.artwork.push(artwork)
-
-        logger.info(`Artwork with id ${artwork.id} is uploaded!`)
-        
+        Promise.all(values.map(image => cloudinary.uploader.upload(image.path)))
+            .then(images => {
+                console.log(images)
+                const uploadedImage = images[0].url
+            })
+            .then(uploadedImage => {                
+                uploadedArtwork = {uploadedImage, title, artist_name, price, description}
+                UploadArtwork.insertArtwork(
+                    req.app.get('db'),
+                    uploadedArtwork
+                    )
+            })
+            .catch(err => {
+                return res 
+                    .status(401)
+                    .json(err)
+            });
     })
+    // .post(bodyParser, (req, res) => {
+    //     console.log(req.body)
+    //     const {title, artist_name, price, description} = req.body
+
+        
+    //     const values = Object.values(req.files)
+    //     const image = values.map(image => cloudinary.uploader.upload(image.path))
+    //     console.log(image)
+    //     const uploadedArtwork = {image, title, artist_name, price, description}
+
+    //         UploadArtwork.insertArtwork(
+    //             req.app.get('db'),
+    //             uploadedArtwork
+    //         )
+
+    //         if(!err)
+    //             return res
+    //                 .status(201)
+    //                 .location(`http://localhost:8000/api/uploadArtwork${artwork.id}`)
+    //                 .json(serializeArtwork(artwork))
+
+        
+
+    //     const artwork = {id: uuid(), image, title, artist_name, price, description}
+
+
+    //     artworkData.artwork.push(artwork)
+
+    //     logger.info(`Artwork with id ${artwork.id} is uploaded!`)
+        
+    // })
 
 
 module.exports = uploadArtworkRouter
