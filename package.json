@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "engines": {
-    "node": "12.13.0"
+    "node": "12.16.1"
   },
   "author": "",
   "license": "ISC",
@@ -39,7 +39,9 @@
     "mocha": "^7.1.1",
     "nodemon": "^2.0.2",
     "postgrator-cli": "^3.3.0",
-    "supertest": "^4.0.2",
-    "fsevents": "*"
+    "supertest": "^4.0.2"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.1.2"
   }
 }
