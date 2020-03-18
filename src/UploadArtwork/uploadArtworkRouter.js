@@ -45,7 +45,6 @@ uploadArtworkRouter
 
         Promise.all(values.map(image => cloudinary.uploader.upload(image.path)))
             .then(images => {
-                console.log(images)
                 return images[0].url
             })
             .then(image => {            

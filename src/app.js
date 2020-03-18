@@ -19,7 +19,7 @@ const morganOption = (NODE_ENV === 'production')
     app.use(helmet())
     app.use(    
         cors({
-            origin: '*'
+            origin: CLIENT_ORIGIN
         }))
 
 
@@ -29,6 +29,8 @@ const morganOption = (NODE_ENV === 'production')
     })
 
     app.use(function errorHandler(error, req, res, next) {
+        console.error(error)
+
         let response 
         if (NODE_ENV === 'production') {
             response = {error: {message: 'server error'}}
