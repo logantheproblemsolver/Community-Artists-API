@@ -1,27 +1,12 @@
-# Express Boilerplate!
+This is the backend for the community artists site. 
 
-This is a boilerplate project used for starting new projects!
+The languages used are Node.js and Express
 
-## Set up
+The database used is Postgresql
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+It is put online using Heroku and the database is using Heroku Postgres
 
-1. Clone this repository to your local machine `git clone https://github.com/logantheproblemsolver/express-boilerplate.git NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`, (`echo ".env" >> .gitignore`)
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+The biggest challenge was taking in FormData, and then figuring out the best way to get the image uploaded to the database. 
+I first tried the byte64 and that seemed to complicated and slow of a process, but found out (after a lot of Googling) that I can use Cloudinary to turn my image into a link. It worked a lot faster and a lot easier to display the image on the front-end!
 
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
 
