@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require ('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
-const {NODE_ENV} = require('./config')
+const {NODE_ENV, CLIENT_ORIGIN} = require('./config')
 const logger = require('./logger')
 const showArtworkRouter = require('./ShowArtwork/showArtworkRouter')
 const uploadArtworkRouter = require('./UploadArtwork/uploadArtworkRouter')
@@ -22,8 +22,11 @@ let allowCrossDomain = function(req, res, next) {
 
     app.use(morgan(morganOption))
     app.use(helmet())
-    app.use(allowCrossDomain)
-    app.use(cors())
+    app.use(
+        cors({
+            origin: CLIENT_ORIGIN
+        })
+    );    app.options(allowCrossDomain)
 
     
 
