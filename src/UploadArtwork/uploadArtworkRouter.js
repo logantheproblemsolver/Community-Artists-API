@@ -51,7 +51,8 @@ uploadArtworkRouter
                 uploadedArtwork = {image, title, artist_name, price, description}
                 UploadArtwork.insertArtwork(
                     req.app.get('db'),
-                    uploadedArtwork
+                    uploadedArtwork,
+                    res.json({status: true})
                     )
             })
             .catch(err => {

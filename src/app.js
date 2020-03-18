@@ -14,19 +14,11 @@ const morganOption = (NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
 
-let allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "*");
-    next();
-    };
 
 
     app.use(morgan(morganOption))
     app.use(helmet())
-    app.use(
-        cors({
-            origin: CLIENT_ORIGIN
-        })
-    );    app.options(allowCrossDomain)
+    app.use(cors());    
 
     
 
