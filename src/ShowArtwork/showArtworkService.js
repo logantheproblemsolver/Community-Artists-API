@@ -3,6 +3,7 @@ const ShowArtwork = {
         return knex
             .select('*')
             .from('artwork')
+            .orderBy('id', 'desc')
     },
     getById(knex, id) {
         return knex 
