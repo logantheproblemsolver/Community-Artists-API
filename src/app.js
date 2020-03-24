@@ -23,6 +23,9 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
+app.use(showArtworkRouter);
+app.use(uploadArtworkRouter);
+
 app.get('/api', (req, res) => {
   res.json({ ok: true });
 });
@@ -39,8 +42,7 @@ app.use((error, res) => {
   res.status(500).json(response);
 });
 
-app.use(showArtworkRouter);
-app.use(uploadArtworkRouter);
+
 
 
 module.exports = app;

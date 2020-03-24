@@ -20,9 +20,6 @@ const uploadArtworkRouter = express.Router();
 
 
 uploadArtworkRouter
-  .route('/api/uploadArtwork');
-
-uploadArtworkRouter
   .route('/api/uploadArtwork')
   .post(bodyParser, (req, res) => {
     const {
