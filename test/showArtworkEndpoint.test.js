@@ -15,15 +15,12 @@ describe('Show All Artwork Endpoint', () => {
 
   after('disconnect from db', () => db.destroy());
 
-  before('cleanup', () => db('bookmarks').truncate());
-
-  afterEach('cleanup', () => db('bookmarks').truncate());
 
   describe('GET api/showartwork', () => {
-    context('Given no booksmarks', () => {
+    context('Given no artwork', () => {
       it('responds with 200 and an empty list', () => supertest(app)
         .get('/api/showartwork')
-        .status(200, []));
+        .expect(200, []));
     });
 
     context('Given there is artwork in the database', () => {

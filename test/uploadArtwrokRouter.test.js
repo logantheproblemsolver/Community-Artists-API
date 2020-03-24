@@ -14,13 +14,11 @@ describe('upload artwork endpoint', () => {
 
   after('disconnect from db', () => db.destroy());
 
-  before('cleanup', () => db('bookmarks').truncate());
 
-  afterEach('cleanup', () => db('bookmarks').truncate());
 
   describe('POST /api/uploadartwork', () => {
     it('responds with 201 when uploading an image', () => {
-      const artwork = fs.readFile('./artwork.jpg');
+      const artwork = readFile('./artwork.jpg');
       const newArtwork = {
         image: { artwork },
         title: 'Test Image',
