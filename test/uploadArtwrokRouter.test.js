@@ -46,7 +46,7 @@ describe('upload artwork endpoint', () => {
         })
         .then((res) => {
           supertest(app)
-            .get(`/api/uploadartwork/${res.body.id}`)
+            .post(`/api/uploadartwork/${res.body.id}`)
             .expect(res.body);
         });
     });
