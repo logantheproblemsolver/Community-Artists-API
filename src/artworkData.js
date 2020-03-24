@@ -1,9 +1,8 @@
-const uuid = require('uuid/v4');
-
+const { v4: uuidv4 } = require('uuid');
 
 const artwork = [
   {
-    id: uuid(),
+    id: uuidv4(),
     image: 'https://res.cloudinary.com/nerdmagic/image/upload/v1584385951/pknj5pedpb8v4uwsjddx.jpg',
     title: 'Absract Art',
     artist_name: 'Unknown',
