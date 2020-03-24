@@ -1,5 +1,6 @@
 const knex = require('knex');
 const app = require('../src/app');
+const fs = require('fs');
 
 
 describe('upload artwork endpoint', () => {
@@ -10,6 +11,7 @@ describe('upload artwork endpoint', () => {
       client: 'pg',
       connection: process.env.TEST_DATABASE_URL,
     });
+    app.set('db', db);
   });
 
   after('disconnect from db', () => db.destroy());
@@ -18,7 +20,10 @@ describe('upload artwork endpoint', () => {
 
   describe('POST /api/uploadartwork', () => {
     it('responds with 201 when uploading an image', () => {
-      const artwork = readFile('./artwork.jpg');
+      const artwork = fs.readFile('./test/artwork.jpg', (err, data) => {
+        if (err) throw err;
+        console.log(data);
+      });
       const newArtwork = {
         image: { artwork },
         title: 'Test Image',

@@ -11,6 +11,7 @@ describe('Show All Artwork Endpoint', () => {
       client: 'pg',
       connection: process.env.TEST_DATABASE_URL,
     });
+    app.set('db', db);
   });
 
   after('disconnect from db', () => db.destroy());
@@ -28,7 +29,7 @@ describe('Show All Artwork Endpoint', () => {
 
       beforeEach('insert artwork', () => db
         .into('artwork')
-        .insert());
+        .insert(testArtwork));
 
       it('responds with 200 and the artwork', () => supertest(app)
         .get('/api/showartwork')
