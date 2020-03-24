@@ -43,11 +43,6 @@ describe('upload artwork endpoint', () => {
           expect(res.body.description).to.eql(newArtwork.description);
           expect(res.body).to.have.property('id');
           expect(res.headers.location).to.eql(`/api/uploadartwork/${res.body.id}`);
-        })
-        .then((res) => {
-          supertest(app)
-            .post(`/api/uploadartwork/${res.body.id}`)
-            .expect(res.body);
         });
     });
   });
