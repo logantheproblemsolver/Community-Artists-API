@@ -21,6 +21,7 @@ showArtworkRouter
       .then((artwork) => {
         res
           .json(artwork.map(serializeartwork));
+        console.log(artwork)
       })
       .catch(next);
   });

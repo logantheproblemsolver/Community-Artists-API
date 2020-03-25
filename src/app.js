@@ -23,16 +23,16 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-app.use(showArtworkRouter);
-app.use(uploadArtworkRouter);
 
 app.get('/api', (req, res) => {
   res.json({ ok: true });
 });
 
 
-app.use((error, res) => {
-  let response;
+app.use((error, req, res, next) => {
+  console.log(error)
+
+    let response;
   if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' } };
   } else {
@@ -42,6 +42,10 @@ app.use((error, res) => {
   res.status(500).json(response);
 });
 
+
+
+app.use(showArtworkRouter);
+app.use(uploadArtworkRouter);
 
 
 

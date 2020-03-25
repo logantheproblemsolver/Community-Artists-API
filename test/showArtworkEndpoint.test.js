@@ -16,6 +16,9 @@ describe('Show All Artwork Endpoint', () => {
 
   after('disconnect from db', () => db.destroy());
 
+  beforeEach('cleanup', () => db('artwork').truncate());
+
+  afterEach('cleanup', () => db('artwork').truncate());
 
   describe('GET api/showartwork', () => {
     context('Given no artwork', () => {
