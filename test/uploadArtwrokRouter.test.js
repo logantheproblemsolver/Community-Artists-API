@@ -16,7 +16,9 @@ describe('upload artwork endpoint', () => {
 
   after('disconnect from db', () => db.destroy());
 
+  beforeEach('cleanup', () => db('artwork').truncate());
 
+  afterEach('cleanup', () => db('artwork').truncate());
 
   describe('POST /api/uploadartwork', () => {
     it('responds with 201 when uploading an image', () => {
