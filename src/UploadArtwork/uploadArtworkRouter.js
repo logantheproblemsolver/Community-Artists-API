@@ -47,7 +47,11 @@ uploadArtworkRouter
           res.json({status: true})
         );
       })
-      .catch((next));
+      .catch((err) => {
+        console.log(err)
+      });
+    res
+      .status(201)
   });
 
 module.exports = uploadArtworkRouter;
