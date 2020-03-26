@@ -21,7 +21,7 @@ const uploadArtworkRouter = express.Router();
 
 uploadArtworkRouter
   .route('/api/uploadArtwork')
-  .post(bodyParser, (req, res) => {
+  .post(bodyParser, (req, res, next) => {
     const {
       title, artist_name, price, description,
     } = req.body;
