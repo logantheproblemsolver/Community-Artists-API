@@ -50,7 +50,6 @@ uploadArtworkRouter
       .catch((err) => {
         console.log(err)
       });
-    artworkData.push(serializeArtwork);
   });
 
 module.exports = uploadArtworkRouter;
