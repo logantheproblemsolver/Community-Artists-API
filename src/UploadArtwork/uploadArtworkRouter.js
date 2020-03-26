@@ -44,7 +44,7 @@ uploadArtworkRouter
         UploadArtwork.insertArtwork(
           req.app.get('db'),
           serializeArtwork,
-          res.json({status: true})
+          res.status(201)
         );
       })
       .catch((next));
