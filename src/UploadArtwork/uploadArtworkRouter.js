@@ -44,11 +44,13 @@ uploadArtworkRouter
         UploadArtwork.insertArtwork(
           req.app.get('db'),
           serializeArtwork,
+          res.status(201)
         );
       })
-      .catch((next));
+      .catch((err) => {
+        console.log(err)
+      });
     artworkData.push(serializeArtwork);
   });
-
 
 module.exports = uploadArtworkRouter;

@@ -22,21 +22,13 @@ describe('upload artwork endpoint', () => {
 
   describe('POST /api/uploadartwork', () => {
     it('responds with 201 when uploading an image', () => {
-      const artwork = fs.readFileSync('./test/artwork.jpg', (err, data) => {
-        if (err) throw err;
-        console.log(data);
-      });
-      const newArtwork = {
-        title: 'Test Image',
-        artist_name: 'Test artist',
-        price: '$6',
-        description: 'This is a test',
-      }
-      console.log({artwork})
       return supertest(app)
         .post('/api/uploadartwork')
-        .attach('image', './test/artwork.jpg')
-        .send(newArtwork)
+        .field('title', 'Test Image')
+        .field('artist_name', 'Test artist')
+        .field('price', '$6.00')
+        .field('description', 'This is a test')
+        .attach('image', __dirname + '/artwork.jpg')
         .expect(201)
         // .expect((res) => {
         //   expect(res.body.image).to.eql(newArtwork.image);
