@@ -4,10 +4,9 @@ const express = require('express');
 const xss = require('xss');
 const cloudinary = require('cloudinary');
 const formData = require('express-form-data');
-const artworkData = require('../artworkData');
 const UploadArtwork = require('./uploadArtworkService');
 
-
+// Cloudinary is used so I can quickly upload images and get back a URL, it's a lot more scaleable than reading 64byte as well
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
@@ -18,7 +17,7 @@ const bodyParser = formData.parse();
 
 const uploadArtworkRouter = express.Router();
 
-
+// This is the router to upload the artwork to the database. It's taking in the cloudinary data and formdata
 uploadArtworkRouter
   .route('/api/uploadArtwork')
   .post(bodyParser, (req, res, next) => {

@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+
+// this is the test array
 function makeArtworkArray() {
   return [
     {

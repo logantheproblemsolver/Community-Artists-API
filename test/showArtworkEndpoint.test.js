@@ -3,6 +3,8 @@ const knex = require('knex');
 const app = require('../src/app');
 const makeArtworkArray = require('./artwork-fixtures');
 
+// this is to test showing the artwork
+
 describe('Show All Artwork Endpoint', () => {
   let db;
 

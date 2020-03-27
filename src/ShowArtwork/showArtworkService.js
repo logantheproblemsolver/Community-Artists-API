@@ -1,3 +1,4 @@
+// this is connecting to the database, future code will connect to find the ID
 const ShowArtwork = {
   getAllArtwork(knex) {
     return knex
@@ -5,13 +6,7 @@ const ShowArtwork = {
       .from('artwork')
       .orderBy('id', 'desc');
   },
-  getById(knex, id) {
-    return knex
-      .from('artwork')
-      .select('*')
-      .where('id', id)
-      .first();
-  },
+  
 };
 
 module.exports = ShowArtwork;

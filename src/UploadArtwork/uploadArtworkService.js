@@ -1,3 +1,4 @@
+// This is the connection for uploading information to the database
 const UploadArtwork = {
   insertArtwork(knex, newArtwork) {
     return knex

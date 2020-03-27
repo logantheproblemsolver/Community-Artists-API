@@ -2,7 +2,7 @@ const knex = require('knex');
 const app = require('../src/app');
 const fs = require('fs');
 
-
+// this is to test uploading the artwork
 describe('upload artwork endpoint', () => {
   let db;
 
@@ -30,15 +30,6 @@ describe('upload artwork endpoint', () => {
         .field('description', 'This is a test')
         .attach('image', __dirname + '/artwork.jpg')
         .expect(201)
-        // .expect((res) => {
-        //   expect(res.body.image).to.eql(newArtwork.image);
-        //   expect(res.body.title).to.eql(newArtwork.title);
-        //   expect(res.body.artist_name).to.eql(newArtwork.artist_name);
-        //   expect(res.body.price).to.eql(newArtwork.price);
-        //   expect(res.body.description).to.eql(newArtwork.description);
-        //   expect(res.body).to.have.property('id');
-        //   expect(res.headers.location).to.eql(`/api/uploadartwork/${res.body.id}`);
-        // });
     });
   });
 });

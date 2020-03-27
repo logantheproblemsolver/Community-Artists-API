@@ -13,7 +13,7 @@ const serializeartwork = (artwork) => ({
   description: xss(artwork.description),
 });
 
-
+// this is the set up for showing the artwork in the database; future iterations will be able to view by ID
 showArtworkRouter
   .route('/api/showartwork')
   .get((req, res, next) => {
