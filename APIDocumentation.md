@@ -1,7 +1,7 @@
 <h1>API Documentation<h1>
 
 To show the artwork the API url is https://morning-garden-77807.herokuapp.com/api/showartwork
-  The data comes as an array with objects in it. 
+  The data comes as an array with objects in it. <br>
     In the object it's formatted like so- 
     {
       title: artwork.title, (this is just text)
